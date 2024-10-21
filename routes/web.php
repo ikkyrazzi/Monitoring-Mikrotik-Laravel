@@ -10,6 +10,8 @@ use App\Http\Controllers\ReportController;
 // Authentication Routes
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.post');
+Route::post('failed', [AuthController::class, 'failed'])->name('failed');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Dashboard Route
 Route::prefix('dashboard')->name('dashboard.')->group(function () {
@@ -18,7 +20,9 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('cpu', [DashboardController::class, 'cpu'])->name('cpu');
     Route::get('load', [DashboardController::class, 'load'])->name('load');
     Route::get('uptime', [DashboardController::class, 'uptime'])->name('uptime');
+    Route::get('report', [DashboardController::class, 'report'])->name('report');
     Route::get('{traffic}', [DashboardController::class, 'traffic'])->name('traffic');
+
 });
 
 // PPPoE Routes

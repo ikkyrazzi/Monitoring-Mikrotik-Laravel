@@ -11,6 +11,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function failed()
+    {
+        return view('failed');
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -33,5 +38,14 @@ class AuthController extends Controller
         $request->session()->put($data);
 
         return redirect()->route('dashboard.index');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('ip');
+        $request->session()->forget('user');
+        $request->session()->forget('password');
+
+        return redirect()->route('login');
     }
 }

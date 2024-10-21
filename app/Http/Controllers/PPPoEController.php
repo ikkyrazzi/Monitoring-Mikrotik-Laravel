@@ -66,6 +66,7 @@ class PPPoEController extends Controller
 
 			return "Koneksi Gagal";
 		}
+		toast('Data PPPoE Berhasil Ditambah','success');
 
         return redirect()->route('pppoe.secret');
 	}
@@ -131,8 +132,8 @@ class PPPoEController extends Controller
 			'comment' => $request['comment'] == '' ? '' : $request['comment'],
 		]);
 
+		toast('Data PPPoE Berhasil Diubah','success');
 		
-		// Alert::success('Success', 'Selamat anda Berhasil mengupdate secret PPPoE');
 		return redirect()->route('pppoe.secret');
 	}
 
@@ -150,7 +151,8 @@ class PPPoEController extends Controller
 				'.id' => '*' . $id
 			],);
 
-			// Alert::success('Success', 'Selamat anda Berhasil menghapus secret PPPoE');
+			toast('Data PPPoE Berhasil Dihapus','success');
+
 			return redirect('pppoe/secret');
 		} else {
 

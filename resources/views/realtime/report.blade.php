@@ -9,7 +9,7 @@
         @foreach ($data as $item)
             <tr>
                 <td>{!! $item['text'] !!}</td>
-                <td>{{ date("d F Y, h:i A", strtotime($item['time'])) }}</td>
+                <td>{{ date("d F Y, h:i A", strtotime($item->created_at)) }}</td>
             </tr>
         @endforeach
 	</tbody>

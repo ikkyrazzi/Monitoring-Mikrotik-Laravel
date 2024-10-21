@@ -58,6 +58,7 @@ class HotspotController extends Controller
                 'limit-uptime' => $request['timelimit'] == '' ? '0' : $request['timelimit'],
                 'comment' => $request['comment'] == '' ? '' : $request['comment'],
             ));
+            toast('Data Secret Berhasil Ditambah','success');
 
             return redirect('hotspot/users');
 
@@ -126,6 +127,7 @@ class HotspotController extends Controller
             'limit-uptime' => $request['timelimit'] == '' ? '0' : $request['timelimit'],
             'comment' => $request['comment'] == '' ? '' : $request['comment'],
         ));
+        toast('Data Secret Berhasil Diubah','success');
 
         return redirect('hotspot/users');
     }
@@ -143,6 +145,8 @@ class HotspotController extends Controller
 			$API->comm('/ip/hotspot/user/remove', [
 				'.id' => '*' . $id
 			],);
+
+            toast('Data Secret Berhasil Dihapus','success');
 
 			return redirect('hotspot/users');
 		} else {

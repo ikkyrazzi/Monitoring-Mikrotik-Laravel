@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Models\RouterosAPI;
 
@@ -24,7 +25,7 @@ class DashboardController extends Controller
             $routerboard = $API->comm('/system/routerboard/print');
             // $identity = $API->comm('/system/identity/print');
         } else {
-            return 'Koneksi Gagal';
+            return redirect()->route('failed');
         }
 
         $data = [
@@ -121,5 +122,12 @@ class DashboardController extends Controller
 
 
         return view('realtime.traffic', $data);
+    }
+
+    public function report()
+    {
+        $data = Report::latest()->limit(2)->get();
+
+        return view('realtime.report', compact('data'));
     }
 }

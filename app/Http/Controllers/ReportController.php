@@ -9,11 +9,16 @@ use function Symfony\Component\String\b;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $report = Report::latest()->limit(20)->get();
+        $tgl_awal = $request->tgl_awal;
+        $tgl_akhir = $request->tgl_akhir;
 
-        return view('traffic.index', compact('report'));
+        $report = Report::latest()->where('created_at', '>=', $tgl_awal . ' 00:00:00')->where('created_at', '<=', $tgl_akhir . ' 23:59:59')->get();
+
+        $view_tgl = "List data mulai dari tangal : " . $tgl_awal . " sampai tanggal : " . $tgl_akhir;
+
+        return view('traffic.index', compact('report', 'view_tgl'));
     }
 
     public function up(){
