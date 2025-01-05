@@ -22,7 +22,6 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('uptime', [DashboardController::class, 'uptime'])->name('uptime');
     Route::get('report', [DashboardController::class, 'report'])->name('report');
     Route::get('{traffic}', [DashboardController::class, 'traffic'])->name('traffic');
-
 });
 
 // PPPoE Routes
@@ -54,6 +53,10 @@ Route::prefix('report')->name('report.')->group(function () {
 });
 
 Route::get('report-traffic', [ReportController::class, 'index'])->name('traffic.index');
+Route::get('up', [ReportController::class, 'up'])->name('up');
+
+// Store Data Down
+Route::get('down', [ReportController::class, 'down'])->name('down');
 
 // Route::prefix('traffic')->name('traffic.')->group(function () {
 //     // Report Traffic UP & Search
@@ -61,4 +64,3 @@ Route::get('report-traffic', [ReportController::class, 'index'])->name('traffic.
 //     Route::get('/load', [ReportController::class, 'load'])->name('load');
 //     Route::get('/search', [ReportController::class, 'search'])->name('search');
 // });
-

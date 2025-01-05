@@ -15,7 +15,7 @@ class HotspotController extends Controller
         $password = session()->get('password');
         $API = new RouterosAPI();
         $API->debug('false');
-        
+
         if ($API->connect($ip, $user, $password)) {
             $hotspotuser = $API->comm('/ip/hotspot/user/print');
             $server = $API->comm('/ip/hotspot/print');
@@ -53,15 +53,14 @@ class HotspotController extends Controller
             $API->comm('/ip/hotspot/user/add', array(
                 'name' => $request['user'] == '' ? '' : $request['user'],
                 'password' => $request['password'] == '' ? '' : $request['password'],
-                'server' => $request['server']== '' ? 'default' : $request['server'],
+                'server' => $request['server'] == '' ? 'default' : $request['server'],
                 'profile' => $request['profile'] == '' ? 'default' : $request['profile'],
                 'limit-uptime' => $request['timelimit'] == '' ? '0' : $request['timelimit'],
                 'comment' => $request['comment'] == '' ? '' : $request['comment'],
             ));
-            toast('Data Secret Berhasil Ditambah','success');
+            toast('Data Hotspot Berhasil Ditambah', 'success');
 
             return redirect('hotspot/users');
-
         } else {
 
             return redirect('failed');
@@ -93,7 +92,6 @@ class HotspotController extends Controller
             ];
 
             return view('hotspot.edit', $data);
-
         } else {
 
             return redirect('failed');
@@ -127,33 +125,33 @@ class HotspotController extends Controller
             'limit-uptime' => $request['timelimit'] == '' ? '0' : $request['timelimit'],
             'comment' => $request['comment'] == '' ? '' : $request['comment'],
         ));
-        toast('Data Secret Berhasil Diubah','success');
+        toast('Data Secret Berhasil Diubah', 'success');
 
         return redirect('hotspot/users');
     }
 
     public function delete($id)
-	{
-		$ip = session()->get('ip');
-		$user = session()->get('user');
-		$password = session()->get('password');
-		$API = new RouterosAPI();
-		$API->debug = false;
+    {
+        $ip = session()->get('ip');
+        $user = session()->get('user');
+        $password = session()->get('password');
+        $API = new RouterosAPI();
+        $API->debug = false;
 
-		if ($API->connect($ip, $user, $password)) {
+        if ($API->connect($ip, $user, $password)) {
 
-			$API->comm('/ip/hotspot/user/remove', [
-				'.id' => '*' . $id
-			],);
+            $API->comm('/ip/hotspot/user/remove', [
+                '.id' => '*' . $id
+            ],);
 
-            toast('Data Secret Berhasil Dihapus','success');
+            toast('Data Secret Berhasil Dihapus', 'success');
 
-			return redirect('hotspot/users');
-		} else {
+            return redirect('hotspot/users');
+        } else {
 
-			return redirect('failed');
-		}
-	}
+            return redirect('failed');
+        }
+    }
 
     public function active()
     {
@@ -174,7 +172,6 @@ class HotspotController extends Controller
             ];
 
             return view('hotspot.active', $data);
-
         } else {
 
             return redirect('failed');

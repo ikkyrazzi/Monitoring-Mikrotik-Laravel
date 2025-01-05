@@ -16,12 +16,13 @@ class ReportController extends Controller
 
         $report = Report::latest()->where('created_at', '>=', $tgl_awal . ' 00:00:00')->where('created_at', '<=', $tgl_akhir . ' 23:59:59')->get();
 
-        $view_tgl = "List data mulai dari tangal : " . $tgl_awal . " sampai tanggal : " . $tgl_akhir;
+        $view_tgl = "List data mulai dari tanggal : " . $tgl_awal . " sampai tanggal : " . $tgl_akhir;
 
         return view('traffic.index', compact('report', 'view_tgl'));
     }
 
-    public function up(){
+    public function up()
+    {
 
         $textup = new Report();
         $textup->text = '<font color=`ff0000`>Traffic Internet Melebihi Dari 50 Mbps</font>';
@@ -30,7 +31,8 @@ class ReportController extends Controller
         return response()->json($textup, 200);
     }
 
-    public function down(){
+    public function down()
+    {
 
         $textup = new Report();
         $textup->text = 'Traffic Internet Stabil, Kurang Dari 50 Mbps';
